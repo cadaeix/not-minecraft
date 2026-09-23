@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANIMA — The Anti-Cube | Continuous Fluid & Bioluminescent Cosmos</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=JetBrains+Mono:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="canvas-container"></div>
+
+  <!-- Header / Manifesto -->
+  <header class="hud-header glass-panel">
+    <div class="logo-group">
+      <div class="anima-glyph">
+        <div class="glyph-core"></div>
+        <div class="glyph-ring"></div>
+      </div>
+      <div>
+        <h1 class="logo-title">ANIMA</h1>
+        <div class="logo-subtitle">THE ANTI-CUBE • CONTINUOUS BIO-COSMOS</div>
+      </div>
+    </div>
+    
+    <div class="preset-selector">
+      <button class="preset-btn active" data-preset="abyssal">Abyssal Bloom</button>
+      <button class="preset-btn" data-preset="gyroid">Nebular Gyroid</button>
+      <button class="preset-btn" data-preset="mycelium">Mycelial Nexus</button>
+      <button class="preset-btn" data-preset="turing">Turing Chrysalis</button>
+      <button class="preset-btn" data-preset="singularity">Singularity Flux</button>
+    </div>
+
+    <div class="audio-control-group">
+      <button id="audio-toggle-btn" class="glass-btn audio-btn" title="Toggle Procedural Synesthetic Audio">
+        <span class="audio-icon">♪</span>
+        <div class="audio-wave">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <span id="audio-status-label">AUDIO OFF</span>
+      </button>
+      <button id="info-toggle-btn" class="glass-btn icon-btn" title="Philosophy & Controls">?</button>
+    </div>
+  </header>
+
+  <!-- Telemetry HUD -->
+  <aside class="hud-telemetry glass-panel">
+    <div class="hud-section-header">
+      <span class="status-dot pulsating"></span>
+      <span class="section-title">CONTINUUM TELEMETRY</span>
+      <span id="fps-counter" class="mono-badge">60 FPS</span>
+    </div>
+
+    <div class="telemetry-grid">
+      <div class="metric-card">
+        <span class="metric-label">PARTICLE FLUX</span>
+        <span id="metric-particles" class="metric-value">120,000</span>
+        <div class="metric-bar"><div id="bar-particles" class="bar-fill" style="width: 80%"></div></div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">VORTICITY FLUID KE</span>
+        <span id="metric-kinetic" class="metric-value">0.00 J</span>
+        <div class="metric-bar"><div id="bar-kinetic" class="bar-fill" style="width: 45%"></div></div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">ENTROPY GRADIENT</span>
+        <span id="metric-entropy" class="metric-value">0.741</span>
+        <div class="metric-bar"><div id="bar-entropy" class="bar-fill" style="width: 60%"></div></div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">PHYSARUM BIOMASS</span>
+        <span id="metric-biomass" class="metric-value">34.8 k</span>
+        <div class="metric-bar"><div id="bar-biomass" class="bar-fill" style="width: 70%"></div></div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">HARMONIC RESONANCE</span>
+        <span id="metric-harmonic" class="metric-value">432.0 Hz [LYD]</span>
+        <div class="metric-bar"><div id="bar-harmonic" class="bar-fill" style="width: 50%"></div></div>
+      </div>
+    </div>
+
+    <div class="anti-minecraft-manifesto">
+      <div class="manifesto-pill">ZERO VOXELS</div>
+      <div class="manifesto-pill">PURE CONTINUUM</div>
+      <div class="manifesto-pill">ORGANIC SYMBIOSIS</div>
+    </div>
+  </aside>
+
+  <!-- Interactive Genesis Tools Dock -->
+  <nav class="hud-tools-dock glass-panel">
+    <div class="tool-list">
+      <button class="tool-btn active" data-tool="vortex" title="[1] Vortex Weaver: Inject swirling angular momentum and glowing bioluminescence">
+        <span class="tool-key">1</span>
+        <span class="tool-icon">🌀</span>
+        <span class="tool-name">Vortex</span>
+      </button>
+
+      <button class="tool-btn" data-tool="graviton_pull" title="[2] Graviton Attractor: Cosmic spacetime curvature and particle capture">
+        <span class="tool-key">2</span>
+        <span class="tool-icon">🧲</span>
+        <span class="tool-name">Attract</span>
+      </button>
+
+      <button class="tool-btn" data-tool="graviton_push" title="[3] Graviton Shockwave: Expansive repulsion rings">
+        <span class="tool-key">3</span>
+        <span class="tool-icon">💥</span>
+        <span class="tool-name">Repel</span>
+      </button>
+
+      <button class="tool-btn" data-tool="turing_seed" title="[4] Turing Morphogen: Injects Gray-Scott activator/inhibitor chemicals">
+        <span class="tool-key">4</span>
+        <span class="tool-icon">🧬</span>
+        <span class="tool-name">Morphogen</span>
+      </button>
+
+      <button class="tool-btn" data-tool="mycelium_spore" title="[5] Mycelium Spore: Spawn Physarum slime mold network agents">
+        <span class="tool-key">5</span>
+        <span class="tool-icon">🍄</span>
+        <span class="tool-name">Mycelium</span>
+      </button>
+
+      <button class="tool-btn" data-tool="chromatic_pulse" title="[6] Chromatic Pulse: Emits synesthetic light wave & modal bell chime">
+        <span class="tool-key">6</span>
+        <span class="tool-icon">✨</span>
+        <span class="tool-name">Pulse</span>
+      </button>
+
+      <button class="tool-btn" data-tool="phase_melt" title="[7] Phase Melter: Mutate non-Euclidean SDF topology into liquid ether">
+        <span class="tool-key">7</span>
+        <span class="tool-icon">💧</span>
+        <span class="tool-name">Melt</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Floating Navigation / Camera Helper -->
+  <div class="hud-camera-controls glass-panel">
+    <button id="cam-mode-btn" class="glass-btn small-btn" title="[C] Switch Camera Mode: Orbit / Free Glide">
+      <span id="cam-mode-icon">🔄</span> <span id="cam-mode-text">Orbit Mode</span>
+    </button>
+    <button id="cam-reset-btn" class="glass-btn small-btn" title="[R] Reset Camera View">
+      <span>⟲</span> <span>Reset</span>
+    </button>
+  </div>
+
+  <!-- Info Modal / Philosophy Overlay -->
+  <div id="info-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h2>ANIMA: The Anti-Minecraft Manifesto</h2>
+        <button id="modal-close-btn" class="glass-btn icon-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="manifesto-grid">
+          <div class="manifesto-col bad">
+            <h3>MINECRAFT</h3>
+            <ul>
+              <li>❌ Rigid, sharp 90-degree cubic voxels</li>
+              <li>❌ Discrete, quantized grid coordinates</li>
+              <li>❌ Destructive extraction: chopping and mining</li>
+              <li>❌ Static blocks with crude gravity exceptions</li>
+              <li>❌ Desolate isolation & survival grinding</li>
+              <li>❌ Flat earth bounded by bedrock and height limits</li>
+            </ul>
+          </div>
+          <div class="manifesto-col good">
+            <h3>ANIMA</h3>
+            <ul>
+              <li>✦ Infinite continuous non-Euclidean fluid manifolds</li>
+              <li>✦ Smooth Eulerian-Lagrangian velocity continuum</li>
+              <li>✦ Generative synthesis: weaving life & resonance</li>
+              <li>✦ Real Navier-Stokes fluid & Physarum slime transport</li>
+              <li>✦ Organic symbiosis & synesthetic polyphonic sound</li>
+              <li>✦ Dynamic volumetric raymarching & curl noise nebulae</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Interactive Controls</h3>
+        <div class="controls-guide">
+          <div class="control-row"><span class="key-tag">Left Click + Drag</span><span>Interact with active Genesis Tool (Vortex, Gravity, Morphogen, etc.)</span></div>
+          <div class="control-row"><span class="key-tag">Right Click + Drag</span><span>Orbit / Rotate Camera around the living cosmos</span></div>
+          <div class="control-row"><span class="key-tag">Scroll Wheel</span><span>Zoom depth / fly through volumetric fields</span></div>
+          <div class="control-row"><span class="key-tag">1 - 7</span><span>Quick-switch Genesis Tools</span></div>
+          <div class="control-row"><span class="key-tag">C</span><span>Toggle Camera: Orbit Mode &lt;—&gt; 6-DOF Celestial Free Glide</span></div>
+          <div class="control-row"><span class="key-tag">W / A / S / D</span><span>Drift / Glide in 6-DOF mode</span></div>
+          <div class="control-row"><span class="key-tag">Spacebar</span><span>Trigger Omnidirectional Harmonic Shockwave</span></div>
+          <div class="control-row"><span class="key-tag">M</span><span>Toggle Procedural Synesthetic Audio Engine</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
