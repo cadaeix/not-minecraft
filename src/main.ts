@@ -29,6 +29,12 @@ import {
   blendPresets,
   clonePreset,
 } from './interaction';
+import {
+  GameStateManager,
+  ResonanceNodes,
+  VoidBlight,
+  GameHud,
+} from './game';
 import { HudOverlay } from './ui/HudOverlay';
 import { PresetConfig, SimulationTelemetry, ToolType } from './types';
 
@@ -61,6 +67,11 @@ export class AnimaApp {
   // Interaction & UI
   private toolManager: ToolManager;
   private hud: HudOverlay;
+  // Game Mode & Ecosystem Harmonization
+  private gameState: GameStateManager;
+  private resonanceNodes: ResonanceNodes;
+  private voidBlight: VoidBlight;
+  private gameHud: GameHud;
 
   // Preset State & Transition Interpolation
   private currentPreset: PresetConfig;
@@ -210,6 +221,21 @@ export class AnimaApp {
 
     this.attractors = new AttractorManager();
     this.scene.add(this.attractors.getGroup());
+    // 8c. Setup Cosmic Harmony Game Systems (Nodes, Blight, Quests)
+    this.gameState = new GameStateManager();
+    this.resonanceNodes = new ResonanceNodes(this.gameState);
+    this.scene.add(this.resonanceNodes.getGroup());
+
+    this.voidBlight = new VoidBlight(this.gameState);
+    this.scene.add(this.voidBlight.getGroup());
+
+    this.gameHud = new GameHud(this.gameState);
+
+    this.gameState.onNotification((notif) => {
+      if (typeof notif.points === 'number' && notif.points > 0) {
+        this.audio.triggerChime(480 + Math.random() * 260, 0.7);
+      }
+    });
 
     // 9. Setup Procedural Web Audio Engine & Synesthetic Bridge
     this.audio = new AudioSynthesis();
@@ -299,6 +325,7 @@ export class AnimaApp {
 
           // Excite bioluminescent flock
           this.flock.applyGravitonImpulse(pt, 12.0 * stroke.strength, stroke.radius * 2.5, 0.4);
+          this.gameState.reportFluidEnergy(this.fluidSim.getKineticEnergy());
           break;
         }
 
@@ -383,6 +410,7 @@ export class AnimaApp {
         case 'place_attractor': {
           // Drop persistent gravitational singularity
           if (stroke.justStarted) {
+            this.gameState.reportAttractorPlaced();
             this.attractors.addAttractor(
               stroke.point3D.clone(),
               3.5 * stroke.strength,
@@ -414,6 +442,8 @@ export class AnimaApp {
 
   private triggerCosmicImpulse(point?: THREE.Vector3, strength: number = 1.0) {
     const pt = point || this.cameraControls.target;
+    this.gameState.reportShockwave();
+    this.voidBlight.hitWithShockwave(pt, 30.0, 50.0);
     this.flock.applyGravitonImpulse(pt, -45.0 * strength, 28.0, 1.2);
     this.audio.triggerGravitonShock(strength);
     this.audio.triggerChime(528, 0.95);
@@ -490,6 +520,7 @@ export class AnimaApp {
     this.liquidSpray.morphShape = preset.raymarch.morphShape;
     this.liquidSpray.blendFactor = preset.raymarch.blendFactor;
     this.liquidSpray.currentLiquidColor.copy(preset.raymarch.colorA);
+    this.resonanceNodes?.respawnNodes(preset.raymarch.morphShape, performance.now() * 0.001);
   }
 
   private async toggleAudio(): Promise<boolean> {
@@ -552,6 +583,19 @@ export class AnimaApp {
     for (let a = 0; a < activeAtts.length; a++) {
       const att = activeAtts[a];
       this.flock.applyGravitonImpulse(att.position, att.mass * 3.5, 22.0);
+    }
+    // 6c. Game Simulation Systems Update
+    this.gameState.update(dt);
+    this.gameHud.update(dt);
+    this.resonanceNodes.update(dt, time);
+    this.voidBlight.update(dt, time, this.attractors.getAttractors());
+
+    // Check liquid spray droplet interactions with nodes & blight
+    const sprayCount = this.liquidSpray.getDropletCount();
+    if (sprayCount > 0) {
+      const packedPos = this.liquidSpray.getPackedPositions();
+      this.resonanceNodes.checkLiquidCollisions(packedPos, sprayCount, this.liquidSpray.dropletRadius);
+      this.voidBlight.checkLiquidCollisions(packedPos, sprayCount, this.liquidSpray.dropletRadius);
     }
     // 7. GPU Particle System Update
     const attractorPos = this.toolManager.getPoint3D();

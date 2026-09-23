@@ -562,3 +562,167 @@ body, html {
   text-align: center;
   color: var(--accent-cyan);
 }
+
+/* ========================================================
+   Cosmic Harmony Game Mode HUD & Dynamic Toasts
+   ======================================================== */
+.game-hud-bar {
+  position: absolute;
+  top: 86px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 20px;
+  z-index: 20;
+  white-space: nowrap;
+}
+
+.game-mission-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.game-mission-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-mission-icon {
+  font-size: 14px;
+  animation: iconPulse 2s infinite ease-in-out;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.game-mission-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.game-mission-progress-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-cyan);
+  margin-left: auto;
+}
+
+.game-mission-bar {
+  width: 180px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.game-mission-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.game-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.game-score-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-score-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.game-score-value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffea79;
+  text-shadow: 0 0 10px rgba(255, 234, 121, 0.5);
+}
+
+.game-combo-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(240, 37, 128, 0.35), rgba(168, 85, 247, 0.35));
+  border: 1px solid var(--accent-magenta);
+  box-shadow: 0 0 12px rgba(240, 37, 128, 0.4);
+  padding: 4px 10px;
+  border-radius: 12px;
+  transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.game-combo-pill.active {
+  transform: scale(1.1);
+  animation: comboPulse 1s infinite alternate;
+}
+
+@keyframes comboPulse {
+  from { box-shadow: 0 0 8px rgba(240, 37, 128, 0.3); }
+  to { box-shadow: 0 0 18px rgba(240, 37, 128, 0.7); }
+}
+
+.game-tier-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-emerald);
+  background: rgba(0, 255, 170, 0.1);
+  border: 1px solid rgba(0, 255, 170, 0.25);
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+
+/* Floating Game Celebration Toasts */
+.game-toast-container {
+  position: absolute;
+  top: 148px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.game-toast {
+  background: rgba(10, 14, 26, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--accent-cyan);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.45);
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  animation: toastFloat 2.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes toastFloat {
+  0% { opacity: 0; transform: translateY(12px) scale(0.9); }
+  12% { opacity: 1; transform: translateY(0) scale(1.05); }
+  20% { transform: translateY(0) scale(1); }
+  80% { opacity: 1; transform: translateY(-8px); }
+  100% { opacity: 0; transform: translateY(-24px); }
+}

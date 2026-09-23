@@ -488,6 +488,10 @@ export class LiquidSpraySimulator {
   public getDropletCount(): number {
     return this.count;
   }
+  public getPackedPositions(): Float32Array {
+    return this.posAttr.array as Float32Array;
+  }
+
 
   public clear(): void {
     this.count = 0;

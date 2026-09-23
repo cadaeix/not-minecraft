@@ -96,6 +96,23 @@ Zero external MP3/WAV audio files:
 | **`8`** | **Liquid Spray**       | Continuous high-velocity bioluminescent liquid jet that collides with the non-Euclidean shape, splashing, beading, and adhering to its surface. |
 | **`9`** | **Drop Singularity**   | Places persistent gravitational attractor wells (with glowing event horizons and spinning accretion disks) that bend liquid and matter.         |
 
+
+---
+
+## 🎮 Cosmic Harmony Game Mode
+
+ANIMA includes an active gameplay loop where you act as a **Celestial Harmonizer** nurturing the living cosmos against creeping void entropy:
+
+- **🌸 Resonant Lotus Hydration**: Dormant lotus receptors are rooted along the contours of the non-Euclidean shape. Select **Liquid Spray (`8`)** and spray liquid over them to hydrate and trigger radiant petal blooms!
+- **⚡ Vortex Overdrive**: Stagnant entropy pockets form in the continuum. Use the **Vortex Weaver (`1`)** to swirl fluid velocity past critical thresholds, clearing the stagnation.
+- **👾 Void Blight Purification**: Rogue discordant energy rifts crackle in space, draining continuum stability. Pummel them with **Liquid Spray (`8`)**, anchor them with **Singularities (`9`)**, and detonate **Harmonic Shockwaves (`Space`)** to dissolve them into showers of starlight!
+- **🔥 Combo Multiplier & Genesis Tiers**: Chaining harmonious actions ramps your combo meter from **`x1` $\to$ `x2` $\to$ `x4` $\to$ `x8` $\to$ `x16`**, multiplying all score rewards. Accumulating score ascends your universe through 5 Genesis Tiers:
+  1. **Tier I: Primordial Spark**
+  2. **Tier II: Resonant Bloom**
+  3. **Tier III: Mycelial Nexus**
+  4. **Tier IV: Singularity Dawn**
+  5. **Tier V: Omnipresent Harmony**
+- **Mode Switcher**: Seamlessly toggle between **`GAME MODE ✦`** (missions, scores, health meter) and **`SANDBOX ⟳`** (free-form cosmic sculpting) using the top-left mode button!
 ---
 
 ## 🎨 The 5 Presets
