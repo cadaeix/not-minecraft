@@ -10,7 +10,9 @@
 
 ```
 <cadnote>
-Brought to you by me asking Gemini 3.8 Flash to not make Minecraft. Everyone else is making Minecraft-clones to test out model capabilities. This is not Minecraft.
+Brought to you by me asking Gemini 3.8 Flash to not make Minecraft.
+Everyone else is making Minecraft-clones to test out model capabilities.
+This is not Minecraft.
 
 Also, I have no idea what's going on in this readme or this repo. Aka vibecoding.
 </cadnote>
