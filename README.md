@@ -2,15 +2,19 @@
 
 > _"Minecraft trapped reality in rigid cubic voxels, isolated survival grinding, and destructive resource extraction. ANIMA is infinite fluid continuity, organic symbiosis, non-Euclidean morphing topologies, and synesthetic radiance."_
 
+![It's not minecraft](/screenshot.png)
+
 ![ANIMA Preview](ANIMA_DEMO.mp4)
 
 ---
 
+```
 <cadnote>
 Brought to you by me asking Gemini 3.8 Flash to not make Minecraft. Everyone else is making Minecraft-clones to test out model capabilities. This is not Minecraft.
 
-Also, I have no idea what's going on in this readme. This is vibecoding.
+Also, I have no idea what's going on in this readme or this repo. Aka vibecoding.
 </cadnote>
+```
 
 ---
 
@@ -96,7 +100,6 @@ Zero external MP3/WAV audio files:
 | **`8`** | **Liquid Spray**       | Continuous high-velocity bioluminescent liquid jet that collides with the non-Euclidean shape, splashing, beading, and adhering to its surface. |
 | **`9`** | **Drop Singularity**   | Places persistent gravitational attractor wells (with glowing event horizons and spinning accretion disks) that bend liquid and matter.         |
 
-
 ---
 
 ## 🎮 Cosmic Harmony Game Mode
@@ -113,6 +116,7 @@ ANIMA includes an active gameplay loop where you act as a **Celestial Harmonizer
   4. **Tier IV: Singularity Dawn**
   5. **Tier V: Omnipresent Harmony**
 - **Mode Switcher**: Seamlessly toggle between **`GAME MODE ✦`** (missions, scores, health meter) and **`SANDBOX ⟳`** (free-form cosmic sculpting) using the top-left mode button!
+
 ---
 
 ## 🎨 The 5 Presets
