@@ -2,7 +2,9 @@ import * as THREE from 'three';
 
 export type ToolType = 
   | 'vortex'           // Injects rotational fluid velocity & luminescence
-  | 'graviton_pull'    // Non-linear gravitational attractor
+  | 'liquid_spray'     // Continuous high-velocity bioluminescent liquid spray with SDF surface collision
+  | 'place_attractor'  // Drops persistent gravitational singularities that bend liquid & matter
+  | 'graviton_pull'    // Non-linear gravitational attractor brush
   | 'graviton_push'    // Repulsive cosmic shockwave
   | 'turing_seed'      // Gray-Scott activator/inhibitor injection
   | 'mycelium_spore'   // Spawns Physarum slime mold agents
@@ -50,6 +52,15 @@ export interface PresetConfig {
   };
 }
 
+export interface GravitationalAttractor {
+  id: string;
+  position: THREE.Vector3;
+  mass: number;             // Positive = black hole attraction, Negative = white hole repulsion
+  radius: number;           // Event horizon radius
+  color: THREE.Color;
+  pulsePhase: number;
+}
+
 export interface SimulationTelemetry {
   fps: number;
   particleCount: number;
@@ -58,4 +69,6 @@ export interface SimulationTelemetry {
   biomass: number;
   dominantHarmonicHz: number;
   activeOrganisms: number;
+  activeAttractors: number;
+  liquidDropletCount: number;
 }

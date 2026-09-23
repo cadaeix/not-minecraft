@@ -7,6 +7,7 @@ export interface HudCallbacks {
   onCameraReset: () => void;
   onCameraModeToggle: () => string; // returns new mode name ('Orbit' | 'Free Glide')
   onImpulse: () => void;
+  onClearAttractors: () => void;
 }
 
 export class HudOverlay {
@@ -28,6 +29,10 @@ export class HudOverlay {
   private barEntropyEl!: HTMLElement;
   private barBiomassEl!: HTMLElement;
   private barHarmonicEl!: HTMLElement;
+  private metricLiquidEl!: HTMLElement;
+  private barLiquidEl!: HTMLElement;
+  private metricAttractorsEl!: HTMLElement;
+  private barAttractorsEl!: HTMLElement;
 
   private audioBtn!: HTMLElement;
   private audioLabel!: HTMLElement;
@@ -58,6 +63,10 @@ export class HudOverlay {
     this.barEntropyEl = document.getElementById('bar-entropy')!;
     this.barBiomassEl = document.getElementById('bar-biomass')!;
     this.barHarmonicEl = document.getElementById('bar-harmonic')!;
+    this.metricLiquidEl = document.getElementById('metric-liquid')!;
+    this.barLiquidEl = document.getElementById('bar-liquid')!;
+    this.metricAttractorsEl = document.getElementById('metric-attractors')!;
+    this.barAttractorsEl = document.getElementById('bar-attractors')!;
 
     this.audioBtn = document.getElementById('audio-toggle-btn')!;
     this.audioLabel = document.getElementById('audio-status-label')!;
@@ -115,6 +124,10 @@ export class HudOverlay {
     document.getElementById('cam-reset-btn')?.addEventListener('click', () => {
       this.callbacks.onCameraReset();
     });
+    // Clear attractors button
+    document.getElementById('clear-attractors-btn')?.addEventListener('click', () => {
+      this.callbacks.onClearAttractors();
+    });
 
     // Info modal toggle
     document.getElementById('info-toggle-btn')?.addEventListener('click', () => {
@@ -143,6 +156,12 @@ export class HudOverlay {
         case '5': this.selectTool('mycelium_spore'); break;
         case '6': this.selectTool('chromatic_pulse'); break;
         case '7': this.selectTool('phase_melt'); break;
+        case '8': this.selectTool('liquid_spray'); break;
+        case '9': this.selectTool('place_attractor'); break;
+        case 'x':
+        case 'X':
+          this.callbacks.onClearAttractors();
+          break;
 
         case 'c':
         case 'C': {
@@ -235,5 +254,13 @@ export class HudOverlay {
     this.barEntropyEl.style.width = `${Math.min(100, t.entropy * 100)}%`;
     this.barBiomassEl.style.width = `${Math.min(100, (t.biomass / 50000) * 100)}%`;
     this.barHarmonicEl.style.width = `${Math.min(100, (t.dominantHarmonicHz / 880) * 100)}%`;
+    if (this.metricLiquidEl) {
+      this.metricLiquidEl.textContent = (t.liquidDropletCount || 0).toLocaleString();
+      this.barLiquidEl.style.width = `${Math.min(100, ((t.liquidDropletCount || 0) / 10000) * 100)}%`;
+    }
+    if (this.metricAttractorsEl) {
+      this.metricAttractorsEl.textContent = `${t.activeAttractors || 0} ACTIVE`;
+      this.barAttractorsEl.style.width = `${Math.min(100, (t.activeAttractors || 0) * 20)}%`;
+    }
   }
 }

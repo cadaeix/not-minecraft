@@ -10,6 +10,8 @@ import {
   PhysarumNetwork,
   ReactionDiffusion,
   BioluminescentFlock,
+  LiquidSpraySimulator,
+  AttractorManager,
 } from './sim';
 import {
   AudioSynthesis,
@@ -49,6 +51,8 @@ export class AnimaApp {
   private fluidSim: FluidSimulator;
   private physarum: PhysarumNetwork;
   private reactionDiffusion: ReactionDiffusion;
+  private liquidSpray: LiquidSpraySimulator;
+  private attractors: AttractorManager;
 
   // Audio Engine
   private audio: AudioSynthesis;
@@ -78,6 +82,8 @@ export class AnimaApp {
     biomass: 32000,
     dominantHarmonicHz: 432,
     activeOrganisms: 160,
+    activeAttractors: 0,
+    liquidDropletCount: 0,
   };
 
   // Scratch objects for 0-GC loop
@@ -198,6 +204,12 @@ export class AnimaApp {
       feed: 0.038,
       kill: 0.061,
     });
+    // 8b. Setup 3D Liquid Spray Simulator & Gravitational Attractors
+    this.liquidSpray = new LiquidSpraySimulator(16000);
+    this.scene.add(this.liquidSpray.mesh);
+
+    this.attractors = new AttractorManager();
+    this.scene.add(this.attractors.getGroup());
 
     // 9. Setup Procedural Web Audio Engine & Synesthetic Bridge
     this.audio = new AudioSynthesis();
@@ -233,6 +245,10 @@ export class AnimaApp {
       },
       onImpulse: () => {
         this.triggerCosmicImpulse();
+      },
+      onClearAttractors: () => {
+        this.attractors.clear();
+        this.audio.triggerGravitonShock(0.5);
       },
     });
 
@@ -347,6 +363,37 @@ export class AnimaApp {
           );
           break;
         }
+        case 'liquid_spray': {
+          // Continuous high-velocity liquid jet from camera along 3D ray
+          const sprayOrigin = stroke.ray.origin.clone().addScaledVector(stroke.ray.direction, 1.5);
+          this.liquidSpray.emitSpray(
+            sprayOrigin,
+            stroke.ray.direction,
+            36,
+            28.0,
+            0.07,
+            this.currentPreset.raymarch.colorA
+          );
+          if (Math.random() < 0.25) {
+            this.audio.triggerChime(340 + Math.random() * 260, 0.35);
+          }
+          break;
+        }
+
+        case 'place_attractor': {
+          // Drop persistent gravitational singularity
+          if (stroke.justStarted) {
+            this.attractors.addAttractor(
+              stroke.point3D.clone(),
+              3.5 * stroke.strength,
+              this.currentPreset.raymarch.colorB
+            );
+            this.audio.triggerGravitonShock(0.9);
+            this.audio.triggerChime(528, 0.9);
+            this.raymarchMaterial.uniforms.uPulse.value = 1.2;
+          }
+          break;
+        }
       }
 
       // Update pointer scratch state for synesthetic bridge
@@ -439,6 +486,10 @@ export class AnimaApp {
 
     // Audio
     this.audio.applyPreset(preset.audio);
+    // Liquid spray settings sync
+    this.liquidSpray.morphShape = preset.raymarch.morphShape;
+    this.liquidSpray.blendFactor = preset.raymarch.blendFactor;
+    this.liquidSpray.currentLiquidColor.copy(preset.raymarch.colorA);
   }
 
   private async toggleAudio(): Promise<boolean> {
@@ -490,6 +541,18 @@ export class AnimaApp {
     this.flock.step(dt, this.fluidSim);
     this.flock.updateRibbonGeometry(this.flockRibbonMesh.geometry);
 
+    // 6b. Placed Attractor Dynamics & Liquid Spray Step
+    this.attractors.update(dt, time);
+    this.liquidSpray.morphShape = this.currentPreset.raymarch.morphShape;
+    this.liquidSpray.blendFactor = this.currentPreset.raymarch.blendFactor;
+    this.liquidSpray.update(dt, time, this.attractors.getAttractors());
+
+    // Couple placed attractors into flocking organisms
+    const activeAtts = this.attractors.getAttractors();
+    for (let a = 0; a < activeAtts.length; a++) {
+      const att = activeAtts[a];
+      this.flock.applyGravitonImpulse(att.position, att.mass * 3.5, 22.0);
+    }
     // 7. GPU Particle System Update
     const attractorPos = this.toolManager.getPoint3D();
     const toolMeta = this.toolManager.getActiveMetadata();
@@ -523,6 +586,8 @@ export class AnimaApp {
         biomass,
         dominantHarmonicHz: this.currentPreset.audio.baseFrequency * 4.0,
         activeOrganisms: this.flock.getActiveCount(),
+        activeAttractors: this.attractors.getCount(),
+        liquidDropletCount: this.liquidSpray.getDropletCount(),
       },
       this.scratchPointerState,
       dt
@@ -540,6 +605,8 @@ export class AnimaApp {
       this.telemetry.dominantHarmonicHz = this.currentPreset.audio.baseFrequency * 4.0;
       this.telemetry.particleCount = this.particleSystem.getCount();
       this.telemetry.activeOrganisms = this.flock.getActiveCount();
+      this.telemetry.activeAttractors = this.attractors.getCount();
+      this.telemetry.liquidDropletCount = this.liquidSpray.getDropletCount();
 
       this.hud.updateTelemetry(this.telemetry);
       this.fpsTimer = 0;

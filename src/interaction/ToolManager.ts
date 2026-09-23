@@ -202,11 +202,45 @@ export const TOOL_METADATA_TABLE: Record<ToolType, ToolMetadata> = {
     maxStrength: 1.0,
     soundCue: 'phase_liquefy',
   },
+  liquid_spray: {
+    type: 'liquid_spray',
+    name: 'Liquid Spray',
+    hotkey: '8',
+    tagline: 'Continuous High-Pressure Fluid Stream',
+    description: 'Sprays high-velocity bioluminescent liquid that collides with the non-Euclidean shape, splashing and adhering to its topological surface.',
+    primaryColor: new THREE.Color(0x00f0ff),
+    secondaryColor: new THREE.Color(0x38bdf8),
+    defaultRadius: 3.5,
+    minRadius: 0.8,
+    maxRadius: 18.0,
+    defaultStrength: 0.85,
+    minStrength: 0.1,
+    maxStrength: 1.0,
+    soundCue: 'liquid_jet',
+  },
+  place_attractor: {
+    type: 'place_attractor',
+    name: 'Drop Singularity',
+    hotkey: '9',
+    tagline: 'Persistent Gravitational Well',
+    description: 'Places a persistent gravitational singularity that bends sprayed liquid, particles, and living matter into orbital accretion rings.',
+    primaryColor: new THREE.Color(0xa855f7),
+    secondaryColor: new THREE.Color(0xec4899),
+    defaultRadius: 5.0,
+    minRadius: 1.0,
+    maxRadius: 24.0,
+    defaultStrength: 0.9,
+    minStrength: 0.1,
+    maxStrength: 1.0,
+    soundCue: 'singularity_spawn',
+  },
 };
 
 /** All tool keys ordered by their hotkeys */
 export const TOOL_ORDER: ToolType[] = [
   'vortex',
+  'liquid_spray',
+  'place_attractor',
   'graviton_pull',
   'graviton_push',
   'turing_seed',
@@ -529,6 +563,12 @@ export class ToolManager {
         break;
       case '7':
         this.setTool('phase_melt');
+        break;
+      case '8':
+        this.setTool('liquid_spray');
+        break;
+      case '9':
+        this.setTool('place_attractor');
         break;
       case 'Tab':
         e.preventDefault();

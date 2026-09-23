@@ -63,18 +63,19 @@ Zero external MP3/WAV audio files:
 
 ---
 
-## 🛠️ The 7 Genesis Tools (The Anti-Mine, Anti-Craft)
+## 🛠️ The 9 Genesis Tools (The Anti-Mine, Anti-Craft)
 
 | Key | Tool | Description |
 |---|---|---|
 | **`1`** | **Vortex Weaver** | Injects swirling angular momentum and glowing bioluminescence into fluid and particle fields. |
-| **`2`** | **Graviton Attractor** | Curvature of spacetime, drawing particles, fluid, and flocking organisms into harmonic orbit. |
+| **`2`** | **Graviton Attractor** | Curvature of spacetime brush, drawing particles, fluid, and flocking organisms into harmonic orbit. |
 | **`3`** | **Graviton Shockwave** | Detonates repulsive cosmic shockwaves in expanding concentric rings. |
 | **`4`** | **Turing Morphogen** | Inoculates concentrated Gray-Scott activator/inhibitor chemicals to trigger spontaneous coral/leopard morphogenesis. |
 | **`5`** | **Mycelial Spores** | Releases a burst of Physarum slime mold agents that deposit chemoattractants and form network bridges. |
 | **`6`** | **Chromatic Pulse** | Emits an expansive light wave that excites all ambient matter and rings the procedural chime synth. |
 | **`7`** | **Phase Melter** | Thermally mutates the raymarching SDF topology, blending crystalline minimal surfaces into liquid plasma. |
-
+| **`8`** | **Liquid Spray** | Continuous high-velocity bioluminescent liquid jet that collides with the non-Euclidean shape, splashing, beading, and adhering to its surface. |
+| **`9`** | **Drop Singularity** | Places persistent gravitational attractor wells (with glowing event horizons and spinning accretion disks) that bend liquid and matter. |
 ---
 
 ## 🎨 The 5 Presets
@@ -95,7 +96,8 @@ Zero external MP3/WAV audio files:
 | **Right Click + Drag** *(or Alt + Drag)* | Orbit / Rotate Camera around the living cosmos |
 | **Middle Click + Drag** | Pan Camera across view plane |
 | **Scroll Wheel** | Zoom depth / fly through volumetric fields |
-| **`1` – `7`** | Quick-switch Genesis Tools |
+| **`1` – `9`** | Quick-switch Genesis Tools |
+| **`X`** *(or Clear button)* | Clear all placed gravitational singularities |
 | **`Spacebar`** | Detonate Omnidirectional Harmonic Shockwave |
 | **`C`** | Toggle Camera Mode: **Celestial Orbit** $\longleftrightarrow$ **6-DOF Free Glide** |
 | **`W` / `A` / `S` / `D`** | Drift / Glide through space (in Free Glide mode) |

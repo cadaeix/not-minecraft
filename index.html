@@ -82,6 +82,16 @@
         <span id="metric-harmonic" class="metric-value">432.0 Hz [LYD]</span>
         <div class="metric-bar"><div id="bar-harmonic" class="bar-fill" style="width: 50%"></div></div>
       </div>
+      <div class="metric-card">
+        <span class="metric-label">LIQUID SPRAY DROPLETS</span>
+        <span id="metric-liquid" class="metric-value">0</span>
+        <div class="metric-bar"><div id="bar-liquid" class="bar-fill" style="width: 0%"></div></div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">GRAVITATIONAL WELLS</span>
+        <span id="metric-attractors" class="metric-value">0 ACTIVE</span>
+        <div class="metric-bar"><div id="bar-attractors" class="bar-fill" style="width: 0%"></div></div>
+      </div>
     </div>
 
     <div class="anti-minecraft-manifesto">
@@ -135,6 +145,17 @@
         <span class="tool-icon">💧</span>
         <span class="tool-name">Melt</span>
       </button>
+      <button class="tool-btn" data-tool="liquid_spray" title="[8] Liquid Spray: Spray continuous fluid jet that collides & flows over the shape">
+        <span class="tool-key">8</span>
+        <span class="tool-icon">🌊</span>
+        <span class="tool-name">Spray</span>
+      </button>
+
+      <button class="tool-btn" data-tool="place_attractor" title="[9] Drop Singularity: Place persistent gravitational attractor wells">
+        <span class="tool-key">9</span>
+        <span class="tool-icon">🪐</span>
+        <span class="tool-name">Attractor</span>
+      </button>
     </div>
   </nav>
 
@@ -145,6 +166,9 @@
     </button>
     <button id="cam-reset-btn" class="glass-btn small-btn" title="[R] Reset Camera View">
       <span>⟲</span> <span>Reset</span>
+    </button>
+    <button id="clear-attractors-btn" class="glass-btn small-btn" title="[X] Clear Gravitational Attractors">
+      <span>✕</span> <span>Clear Wells</span>
     </button>
   </div>
 
